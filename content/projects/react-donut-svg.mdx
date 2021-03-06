@@ -1,0 +1,108 @@
+---
+name: 'react-donut-svg'
+description: '🍩 A flexible lightweight react donut chart component'
+background: 'teal'
+slug: 'react-donut-svg'
+url: 'https://manelet.github.io/react-donut-svg/'
+github: 'https://github.com/manelet/react-donut-svg'
+call_to_action: 'npm i -S react-donut-svg'
+stack:
+  - 'React'
+  - 'TypeScript'
+tags:
+  - 'charts'
+  - 'svg'
+---
+
+import Donut from 'react-donut-svg'
+import Panel from '../../src/components/panel/panel.js'
+
+<div className="project__hero">
+  <div className="showcase">
+    <div>
+      <Donut delay={1000} value={75} label="A" color="fuchsia" />
+    </div>
+    <div>
+      <Donut delay={1250} value={100} label="B" />
+    </div>
+    <div>
+      <Donut delay={1500} value={25} label="C" color="lime" />
+    </div>
+    <div>
+      <Donut delay={1750} value={33} label="D" color="fuchsia" />
+    </div>
+  </div>
+  <div className="flex flex-col">
+    <h2>Light donuts, just 1.7kb</h2>
+    <p>
+      Do you need to show some key indicators in a form of donut chart? I've got your back covered!
+      💪
+    </p>
+    <p>Enjoy easy-to-use, responsive, SVG animated donut charts with just 2 steps.</p>
+  </div>
+</div>
+
+<div className='project__narrow'>
+  <h2>Install</h2>
+
+```javascript
+npm install -S react-donut-svg
+```
+
+</div>
+
+<div className='project__narrow'>
+  <h2>Usage</h2>
+
+```jsx
+import Donut from 'react-donut-svg'
+
+function Chart() {
+  return <Donut value={50} label="name" />
+}
+```
+
+</div>
+
+<div className='project__narrow'>
+  <h2>Props</h2>
+
+  <Panel items={[
+    {
+      name: 'label',
+      description: `<pre>string</pre> Text displayed on top of the donut.`
+    },
+    {
+      name: 'value',
+      description: '<pre>int</pre> Value of the donut. From 0 to 100.'
+    },
+    {
+      name: 'color',
+      description: '<pre>string</pre> Fill color of the donut. Defaults to <pre>rgba(151, 239, 233, 1)</pre>'
+    },
+    {
+      name: 'bgColor',
+      description: '<pre>string</pre> Fill color of the background of the donut. Defaults to <pre>#ccc</pre>'
+    },
+    {
+      name: 'withGradient',
+      description: '<pre>boolean</pre> Whether or not to use color gradient. Defaults to <pre>false</pre>'
+    },
+    {
+      name: 'rounded',
+      description: '<pre>boolean</pre> Whether or not to use rounded borders. Defaults to <pre>true</pre>'
+    },
+    {
+      name: 'delay',
+      description: '<pre>int</pre> Delay in miliseconds. Defaults to <pre>0</pre>'
+    },
+    {
+      name: 'duration',
+      description: '<pre>int</pre> Duration of the animation in miliseconds. Defaults to <pre>850</pre>'
+    },
+    {
+      name: 'showLabel',
+      description: '<pre>boolean</pre> Whether or not to show the label. Defaults to <pre>true</pre>'
+    }
+  ]} />
+</div>

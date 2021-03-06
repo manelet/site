@@ -1,0 +1,44 @@
+[
+  {
+    "name": "bocado",
+    "description": "🥑 A mobile app to empower your cooking creativity and meal planification",
+    "background": "#D65DB1",
+    "slug": "bocado",
+    "github": "https://github.com/bocadoapp",
+    "call_to_action": "https://bocadoapp.com",
+    "url": "https://bocadoapp.com",
+    "stack": ["javascript"],
+    "tags": ["frontend", "backend"]
+  },
+  {
+    "name": "nyora",
+    "description": "🤖 AI set of tools for food metadata extraction and classification",
+    "background": "#FF6F91",
+    "slug": "nyora",
+    "call_to_action": "https://nyora.ai",
+    "stack": ["python"],
+    "tags": ["machine learning"],
+    "url": "https://nyora.ai"
+  },
+  {
+    "name": "react-donut-svg",
+    "description": "🍩 A flexible lightweight react donut chart component",
+    "background": "teal",
+    "slug": "react-donut-svg",
+    "call_to_action": "npm i -S react-donut-svg",
+    "stack": ["typescript", "react"],
+    "tags": ["charts", "doghnut"],
+    "url": "https://manelet.github.io/react-donut-svg/",
+    "github": "https://github.com/manelet/react-donut-svg"
+  },
+  {
+    "name": "str",
+    "description": "🌍 A JavaScript string manipulation library. CJS & ESM compatible.",
+    "background": "linear-gradient(34deg, rgba(124,0,0,1) 0%, rgba(187,0,43,1) 35%, rgba(255,100,0,1) 100%)",
+    "slug": "str",
+    "call_to_action": "npm i -S str",
+    "stack": ["typescript"],
+    "url": "https://str.js.org",
+    "github": "https://github.com/manelet/str"
+  }
+]
