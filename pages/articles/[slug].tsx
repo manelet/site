@@ -25,7 +25,7 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
         <h1 tw="text-4xl text-center">{data.title}</h1>
 
         <div tw="flex items-center justify-between text-gray-500 my-10">
-          <time tw="text-xs">written {formattedDate(data.date)}</time>
+          <time tw="text-sm">written {formattedDate(data.date)}</time>
           <div tw="flex items-center">
             <div tw="flex flex-col mr-4">
               <p tw="mt-0 mb-1">Manel Escuer</p>

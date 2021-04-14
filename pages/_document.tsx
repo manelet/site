@@ -60,6 +60,7 @@ export default class MyDocument extends Document<DocumentInitialProps & CustomDo
             />
           )}
           <link rel="icon" href="/favicon.ico" />
+          <link rel="preload" href="https://fonts.cdnfonts.com/css/cascadia-code" as="style" />
         </Head>
         <body>
           {process.env.NODE_ENV === 'production' && (
