@@ -12,7 +12,7 @@ import tw, { styled } from 'twin.macro'
 import Head from 'next/head'
 
 import Block from '../../layout/block'
-import { Beginnings, Career, Entrepreneurship } from './sections'
+import { Beginnings, Career, Entrepreneurship } from '../../layout/about/sections'
 
 const sections = {
   Beginnings,
