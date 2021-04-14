@@ -3,6 +3,8 @@ import { FC } from 'react'
 import Layout, { Provider } from '../layout/layout'
 import { GlobalStyles } from '../styles/globals'
 
+import '../styles/code.css'
+
 export type AppPropsEnhanced = AppProps & {
   theme: 'dark' | 'light'
 }

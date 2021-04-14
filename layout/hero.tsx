@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { Wrapper, Inner } from './block'
+import { Wrapper } from './block'
 
 interface HeroProps {
   stripHeaderHeight: boolean
 }
 
 const HeroWrapper = styled(Wrapper)`
+  position: relative;
   width: 100%;
   height: ${({ stripHeaderHeight }: HeroProps) =>
     stripHeaderHeight ? 'calc(100vh - 60px)' : '100vh'};
@@ -16,7 +17,7 @@ const HeroWrapper = styled(Wrapper)`
 const Hero: FC<HeroProps> = ({ children, stripHeaderHeight = true }) => {
   return (
     <HeroWrapper as="section" stripHeaderHeight={stripHeaderHeight}>
-      <Inner>{children}</Inner>
+      {children}
     </HeroWrapper>
   )
 }

@@ -32,7 +32,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    ${tw`bg-primary dark:bg-secondary text-secondary dark:text-primary`}
+    ${tw`bg-first dark:bg-second text-second dark:text-first`}
   }
 
   #__next {

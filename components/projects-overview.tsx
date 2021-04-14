@@ -52,34 +52,42 @@ const ProjectsWrapper = styled.div`
 
   &:after {
     content: '';
-    position: absolute;
+
+    ${tw`
+    absolute
+    h-full
+    right-0
+    bg-gradient-to-l
+    dark:from-second
+    from-first
+    to-transparent
+    `}
+
     width: 50px;
-    height: 100%;
-    right: 0;
     opacity: 0.35;
     transition: all 0.3s ease-in-out;
-
-    background: -moz-linear-gradient(
-      left,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ); /* FF3.6-15 */
-    background: -webkit-linear-gradient(
-      left,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(
-      to left,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
   }
 `
 
 const ProjectsWrapperInner = styled.div`
   ${tw`flex w-full py-6 overflow-x-scroll	md:pl-10 md:-ml-10`}
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    ${tw`bg-gray-50 dark:bg-second`}
+  }
+
+  ::-webkit-scrollbar-thumb {
+    ${tw`bg-gray-300 dark:bg-gray-300`}
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    ${tw`bg-gray-400 dark:bg-gray-400`}
+  }
 
   @media screen and (min-width: 768px) {
     width: calc(100% + 2.5rem);
@@ -88,7 +96,7 @@ const ProjectsWrapperInner = styled.div`
 
 const Project = styled.div`
   ${tw`
-  flex 
+  flex
   flex-col
   justify-center
   w-full

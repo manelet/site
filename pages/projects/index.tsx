@@ -8,7 +8,11 @@ export default function Projects(): ReactElement {
   return (
     <>
       <Head>
-        <title>Projects</title>
+        <title>Projects - Manel Escuer</title>
+        <meta
+          name="description"
+          content="Projects developed in spare time, mostly uncompleted. One day one of this projects will become a unicorn company 🦄"
+        />
       </Head>
 
       <Block>

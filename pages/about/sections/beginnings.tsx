@@ -1,12 +1,24 @@
-import 'twin.macro'
 import { FC } from 'react'
+import Image from 'next/image'
+import 'twin.macro'
+import { Content, ContentWrapper, ImageWrapper } from '../components'
 
 export const Beginnings: FC = () => {
   return (
     <>
-      <div tw="flex flex-col md:flex-row w-full items-center my-6">
-        <div tw="w-full">images</div>
-        <div tw="w-full">
+      <Content>
+        <ImageWrapper tw="md:flex-row">
+          <div
+            tw="md:right-0 md:absolute md:self-end z-10"
+            style={{ maxWidth: '200px', bottom: '-3rem' }}
+          >
+            <Image src="/about/manel-football.jpg" width={500} height={715} layout="responsive" />
+          </div>
+          <div tw="relative w-full" style={{ maxWidth: '320px' }}>
+            <Image src="/about/manel-computer.jpg" width={500} height={632} layout="responsive" />
+          </div>
+        </ImageWrapper>
+        <ContentWrapper>
           <h2>Beginnings</h2>
           <p>
             The two things that I liked to do the most as a child were playing football, I played
@@ -20,11 +32,11 @@ export const Beginnings: FC = () => {
               😅
             </span>
           </p>
-        </div>
-      </div>
+        </ContentWrapper>
+      </Content>
 
-      <div tw="flex flex-col-reverse md:flex-row w-full items-center my-6">
-        <div tw="w-full">
+      <Content>
+        <ContentWrapper>
           <h2>First steps towards web</h2>
           <p>
             I still do remember myself toying with Frontpage 98 with 10yo playing with tables to
@@ -42,9 +54,17 @@ export const Beginnings: FC = () => {
             .
           </p>
           <p>Without even knowing it, those years gave me a direction for my career.</p>
-        </div>
-        <div tw="w-full">images</div>
-      </div>
+        </ContentWrapper>
+        <ImageWrapper tw="md:flex-col">
+          <div>
+            <Image src="/about/frontpage.jpg" width={640} height={480} layout="responsive" />
+          </div>
+
+          <div tw="md:absolute md:-bottom-20 md:-right-10" style={{ maxWidth: '200px' }}>
+            <Image src="/about/counter-strike.jpg" width={1024} height={750} layout="responsive" />
+          </div>
+        </ImageWrapper>
+      </Content>
     </>
   )
 }

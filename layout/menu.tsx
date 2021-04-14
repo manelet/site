@@ -1,9 +1,9 @@
-import tw, { styled } from 'twin.macro'
+import tw from 'twin.macro'
+import styled from 'styled-components'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { animated, useSpring } from 'react-spring'
-import { FC, useEffect, useState, useRef } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useWindowWidth } from '@react-hook/window-size'
 
 import { IconTwitter } from '../components/icons/twitter'
@@ -19,44 +19,32 @@ import Dropdown, {
 import { Category } from '../@types/category'
 import { capitalize } from '../lib/utils'
 
-const DDToggle = styled(DropdownToggle)`
-  @media screen and (min-width: 768px) {
-    margin-right: 2.5rem;
-  }
-`
-
-const DDMenu = styled(DropdownMenu)`
-  width: auto;
-  @media screen and (min-width: 768px) {
-    width: 200px;
-  }
-`
-
 const Menu: FC = () => {
   const [categories, setCategories] = useState<Category[]>([])
   const router = useRouter()
   const width = useWindowWidth()
   const {
-    state: { showMobileMenu },
+    state: { showMobileMenu, theme },
     actions: { toggleMobileMenu },
   } = useLayout()
-  const ref = useRef(null)
-  const canAnimate = !!(width && width <= 768)
-  const iconSize = canAnimate ? 24 : 18
-  const styles = useSpring({
-    opacity: showMobileMenu ? 1 : 0,
-    config: { duration: 350 },
-    onStart(): void {
-      if (ref.current && showMobileMenu && canAnimate) {
-        ref.current.style.visibility = 'visible'
-      }
-    },
-    onRest({ opacity }) {
-      if (!opacity && canAnimate) {
-        ref.current.style.visibility = 'hidden'
-      }
-    },
-  })
+  const fill = theme === 'dark' ? 'white' : 'black'
+  // const ref = useRef(null)
+  const isMobile = width && width <= 768
+  const iconSize = isMobile ? 24 : 18
+  // const styles = useSpring({
+  //   opacity: showMobileMenu ? 1 : 0,
+  //   config: { duration: 350 },
+  //   onStart(): void {
+  //     if (ref.current && showMobileMenu && isMobile) {
+  //       ref.current.style.visibility = 'visible'
+  //     }
+  //   },
+  //   onRest({ opacity }) {
+  //     if (!opacity && isMobile) {
+  //       ref.current.style.visibility = 'hidden'
+  //     }
+  //   },
+  // })
 
   useEffect(() => {
     fetch('/api/categories')
@@ -64,9 +52,9 @@ const Menu: FC = () => {
       .then(setCategories)
   }, [])
 
-  useEffect(() => {
-    ref.current.style.visibility = width < 768 ? 'hidden' : 'visible'
-  }, [width])
+  // useEffect(() => {
+  //   ref.current.style.visibility = width < 768 ? 'hidden' : 'visible'
+  // }, [width])
 
   useEffect(() => {
     const handleRouteChange = (): void => {
@@ -82,24 +70,23 @@ const Menu: FC = () => {
 
   return (
     <>
-      <Nav style={canAnimate ? styles : {}} ref={ref}>
+      <Nav css={[isMobile && showMobileMenu && tw`visible opacity-100`]}>
         <div tw="md:not-last-of-type:mr-10">
           <Dropdown>
-            <DDToggle>
+            <DropdownToggle>
               <Link href="/articles">
                 <MenuLink>Articles</MenuLink>
               </Link>
-            </DDToggle>
-            <DDMenu>
-              {categories.length &&
-                categories.map(({ name, slug }) => (
-                  <DropdownItem key={slug}>
-                    <Link href={`/category/${slug}`}>
-                      <a>{capitalize(name)}</a>
-                    </Link>
-                  </DropdownItem>
-                ))}
-            </DDMenu>
+            </DropdownToggle>
+            <DropdownMenu css={[`width: 200px;`]}>
+              {categories?.map(({ name, slug }) => (
+                <DropdownItem key={slug}>
+                  <Link href={`/category/${slug}`}>
+                    <a>{capitalize(name)}</a>
+                  </Link>
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
           </Dropdown>
         </div>
         <Link href="/projects">
@@ -109,16 +96,16 @@ const Menu: FC = () => {
           <MenuLink>About</MenuLink>
         </Link>
         <Link href="/contact">
-          <MenuLink>Drop a line</MenuLink>
+          <MenuLink>Contact</MenuLink>
         </Link>
 
         <MenuIcons>
           <ThemeToggler width={iconSize} height={iconSize} />
           <a href="https://twitter.com/manelescuer" target="_blank" rel="noreferrer">
-            <IconTwitter width={iconSize} height={iconSize} />
+            <IconTwitter width={iconSize} height={iconSize} fill={fill} />
           </a>
           <a href="https://github.com/manelet" target="_blank" rel="noreferrer">
-            <IconGithub width={iconSize} height={iconSize} />
+            <IconGithub width={iconSize} height={iconSize} fill={fill} />
           </a>
         </MenuIcons>
       </Nav>
@@ -130,7 +117,8 @@ const Menu: FC = () => {
 const MenuIcons = dynamic(() => import('./menu-icons/menu-icons'), { ssr: false })
 // const ThemeToggler = dynamic(() => import('./theme-toggler'), { ssr: false })
 
-const MenuLink = tw.a`
+const MenuLink = styled.a`
+  ${tw`
   cursor-pointer
   text-3xl
   font-extrabold
@@ -138,13 +126,19 @@ const MenuLink = tw.a`
   md:font-normal
   mr-0
   md:not-last-of-type:mr-10
+  `}
+
+  :hover {
+    background: -webkit-linear-gradient(red, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 `
 
-const Nav = styled(animated.nav)`
+const Nav = styled.nav`
   ${tw`
   z-0
   bg-white
-  invisible
   flex
   flex-col
   justify-center
@@ -156,16 +150,19 @@ const Nav = styled(animated.nav)`
   bottom-0
   w-screen
   h-screen
+  invisible
   opacity-0
+  duration-300
+  transition
 
+  md:visible
+  md:opacity-100
   md:bg-transparent
   md:relative
-  md:visible
   md:flex-row
   md:justify-end
   md:w-auto
   md:h-auto
-  md:opacity-100
 `}
 `
 

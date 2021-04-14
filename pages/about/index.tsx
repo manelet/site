@@ -9,6 +9,8 @@ import {
   useCallback,
 } from 'react'
 import tw, { styled } from 'twin.macro'
+import Head from 'next/head'
+
 import Block from '../../layout/block'
 import { Beginnings, Career, Entrepreneurship } from './sections'
 
@@ -26,10 +28,6 @@ const sectionStyles = {
   Entrepreneurship: tw`flex flex-col md:flex-row w-full items-center my-6`,
 }
 
-interface TabProps {
-  active?: boolean
-}
-
 const Tab = styled.a`
   ${tw`
     relative
@@ -38,13 +36,8 @@ const Tab = styled.a`
     cursor-pointer
     text-xs
   `}
+
   transition: all .25s ease-in-out;
-
-  ${({ active }: TabProps) => active && tw`bg-gray-100 shadow-inner`}
-
-  &:hover {
-    ${tw`bg-gray-100 shadow-inner`}
-  }
 
   &:not(:last-of-type) {
     ${tw`mr-3`}
@@ -72,7 +65,9 @@ const TabWrapper = styled.div`
 `
 
 const observerOptions = {
-  threshold: 0.1,
+  threshold: 0.5,
+  trackVisibility: true,
+  delay: 100,
 }
 
 const About: FC = () => {
@@ -95,34 +90,17 @@ const About: FC = () => {
 
   sectionNames.forEach((_, i) => (sectionRefs.current[i] = createRef()))
 
-  const observerCallback = useCallback((entries: IntersectionObserverEntry[]): void => {
-    const BreakException = {}
+  const observerCallback = useCallback((entries: Array<IntersectionObserverEntry>): void => {
+    const candidateSections: Array<IntersectionObserverEntry> = []
 
-    try {
-      entries.forEach((entry: IntersectionObserverEntry) => {
-        if (entry.intersectionRatio === 1) {
-          setActive(`#${entry.target.id}`)
-          throw BreakException
-        }
-
-        if (entry.intersectionRatio > 0.1) {
-          if (entry.isIntersecting) {
-            return setActive(`#${entry.target.id}`)
-          }
-        }
-
-        if (!entry.isIntersecting) {
-          const index = sectionNames.findIndex((s) => s.toLowerCase() === entry.target.id)
-
-          if (sectionNames[index - 1]) {
-            return setActive(`#${sectionNames[index - 1].toLowerCase()}`)
-          }
-        }
-      })
-    } catch (e) {
-      if (e !== BreakException) {
-        throw e
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        candidateSections.push(entry)
       }
+    })
+
+    if (candidateSections.length) {
+      setActive(`#${candidateSections.pop().target.id}`)
     }
   }, [])
 
@@ -133,29 +111,49 @@ const About: FC = () => {
   }, [observerCallback])
 
   return (
-    <Block>
-      <TabWrapper>
-        {sectionNames.map((section) => {
-          const id = `#${section.toLowerCase()}`
-          return (
-            <Tab key={`tab-${id}`} href={id} active={isActive(id)} onClick={goToSection}>
-              {section}
-            </Tab>
-          )
-        })}
-      </TabWrapper>
+    <>
+      <Head>
+        <title>About - Manel Escuer</title>
+        <meta
+          name="description"
+          content="A brief history of my beginnings from developing hobby web pages with Frontpage 95 to owning an ecommerce with 22yo"
+        />
+      </Head>
+      <Block>
+        <TabWrapper>
+          {sectionNames.map((section) => {
+            const id = `#${section.toLowerCase()}`
+            return (
+              <Tab
+                key={`tab-${id}`}
+                href={id}
+                onClick={goToSection}
+                css={[
+                  isActive(id)
+                    ? tw`bg-gray-100 dark:bg-gray-800`
+                    : tw`bg-transparent dark:bg-transparent`,
+                ]}
+              >
+                {section}
+              </Tab>
+            )
+          })}
+        </TabWrapper>
 
-      {sectionNames.map((section, i) => {
-        const id = section.toLowerCase()
-        const Section = sections[section]
+        <div>
+          {sectionNames.map((section, i) => {
+            const id = section.toLowerCase()
+            const Section = sections[section]
 
-        return (
-          <div ref={sectionRefs.current[i]} id={id} key={id} css={[sectionStyles[section]]}>
-            <Section />
-          </div>
-        )
-      })}
-    </Block>
+            return (
+              <div ref={sectionRefs.current[i]} id={id} key={id} css={[sectionStyles[section]]}>
+                <Section />
+              </div>
+            )
+          })}
+        </div>
+      </Block>
+    </>
   )
 }
 

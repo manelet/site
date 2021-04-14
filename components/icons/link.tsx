@@ -1,12 +1,6 @@
 import { FC, SVGProps } from 'react'
-import { useLayout } from '../../layout/state'
 
-export const IconLink: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24, fill }) => {
-  const {
-    state: { theme },
-  } = useLayout()
-  fill = fill || theme === 'dark' ? 'white' : 'black'
-
+export const IconLink: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24, fill = 'black' }) => {
   return (
     <svg
       fill="none"

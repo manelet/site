@@ -3,30 +3,57 @@ import { ParsedUrlQuery } from 'querystring'
 import { FC } from 'react'
 import tw from 'twin.macro'
 import styled from 'styled-components'
+import Head from 'next/head'
+
 import { Project as TProject } from '../../@types/projects'
 import { IconGithub } from '../../components/icons/github'
 import { IconLink } from '../../components/icons/link'
-import Block from '../../layout/block'
+import { Wrapper, Inner } from '../../layout/block'
 import { getSlugs, find } from '../../projects'
+import projectComponents from '../../components/projects/index'
+import { Wip } from '../../components/wip'
+import { useLayout } from '../../layout/layout'
 
 interface Params extends ParsedUrlQuery {
   slug: string
 }
 
 const IconLabelWrapper = styled.div`
-  display: flex;
+  ${tw`flex relative`}
+
+  svg {
+    ${tw`cursor-pointer`}
+  }
 
   span {
-    width: 0px;
-    opacity: 0;
+    ${tw`hidden opacity-0 absolute text-white bg-black text-center text-xs rounded px-2 py-2`}
     transition: all 0.3s ease-in-out;
+    bottom: 20px;
+    min-width: 120px;
+    transform: translateX(-50%);
   }
 
   :hover {
     span {
-      opacity: 1;
-      width: auto;
+      ${tw`inline-block opacity-75`}
     }
+  }
+
+  :not(:last-child) {
+    ${tw`mr-2`}
+  }
+`
+
+const ProjectHeaderWrapper = styled(Wrapper)`
+  ${tw`z-10`}
+  height: calc(350px - var(--nav-height));
+`
+
+const CallToAction = styled.code`
+  ${tw`bg-black text-white opacity-50 p-3 rounded-lg transition-opacity flex-shrink-0`}
+
+  :hover {
+    ${tw`opacity-100`}
   }
 `
 
@@ -41,23 +68,38 @@ const IconLabel: FC<{ label: string }> = ({ children, label }) => {
 
 const Project: FC<{ project: TProject }> = ({ project }) => {
   const { name, description, call_to_action } = project
-  return (
-    <Block>
-      <h1 tw="text-5xl text-white">{name}</h1>
-      <p tw="text-white">{description}</p>
-      <div tw="flex justify-between text-white">
-        <code>{call_to_action}</code>
-        <div tw="flex w-full justify-end">
-          <IconLabel label="Visit site">
-            <IconLink width={18} height={18} fill="white" />
-          </IconLabel>
+  const Content = projectComponents[name]
+  const { state } = useLayout()
+  const fill = state.theme === 'dark' ? 'white' : 'black'
 
-          <IconLabel label="Github">
-            <IconGithub width={18} height={18} fill="white" />
-          </IconLabel>
-        </div>
-      </div>
-    </Block>
+  return (
+    <>
+      <Head>
+        <title>{name} - Manel Escuer</title>
+        <meta name="description" content={description} />
+      </Head>
+      <ProjectHeaderWrapper>
+        <Inner>
+          <h1 tw="text-5xl text-white">{name}</h1>
+          <p tw="text-white">{description}</p>
+          <div tw="flex justify-between text-white items-center">
+            <CallToAction>{call_to_action}</CallToAction>
+            <div tw="flex w-full justify-end">
+              <IconLabel label="Visit site">
+                <IconLink width={18} height={18} fill={fill} />
+              </IconLabel>
+
+              <IconLabel label="Github">
+                <IconGithub width={18} height={18} fill={fill} />
+              </IconLabel>
+            </div>
+          </div>
+        </Inner>
+      </ProjectHeaderWrapper>
+      <Wrapper>
+        <Inner>{Content ? <Content /> : <Wip />}</Inner>
+      </Wrapper>
+    </>
   )
 }
 

@@ -32,11 +32,13 @@ const Instagram: FC = () => {
 
   return (
     <Block>
-      <div tw="flex flex-col md:flex-row bg-gray-100 rounded-xl justify-center items-start my-10">
+      <div tw="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-800 rounded-xl justify-center items-start my-10">
         <div tw="p-10">
           <h2>I love to cook! And you?</h2>
           <p>Feel free to follow me on Instagram to see my recipes and exchange dishes ideas!</p>
-          <Button type="instagram">@maneleat</Button>
+          <Button as="button" theme="instagram">
+            @maneleat
+          </Button>
         </div>
         <div
           css={css`

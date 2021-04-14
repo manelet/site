@@ -15,7 +15,11 @@ const Articles: FC<ArticleProps> = ({ articles }) => {
   return (
     <>
       <Head>
-        <title>Articles</title>
+        <title>Articles - Manel Escuer</title>
+        <meta
+          name="description"
+          content="List of curated articles written by Manel with much love and coffe over the time."
+        />
       </Head>
       <Block>
         <ArticleList title="Articles" articles={articles} />

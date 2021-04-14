@@ -6,5 +6,12 @@ module.exports = {
 
     return config
   },
+
   images: { domains: ['scontent-mad1-1.cdninstagram.com'] },
+
+  serverRuntimeConfig: {
+    sendgrid: {
+      key: process.env.SENDGRID_API_KEY,
+    },
+  },
 }

@@ -21,11 +21,11 @@ const ArticleList: FC<{ title: string; articles: TArticle[] }> = ({
 
         return (
           <Article key={`post-list-${i}`} onClick={() => push(slug)}>
-            <Date>{formattedDate(data.date)}</Date>
             <div>
               <h3 tw="text-2xl">
                 <Link href={slug}>{data.title}</Link>
               </h3>
+              <Date>{formattedDate(data.date)}</Date>
               <p>{data.excerpt}</p>
             </div>
           </Article>
@@ -37,10 +37,13 @@ const ArticleList: FC<{ title: string; articles: TArticle[] }> = ({
 
 const Article = styled.div`
   ${tw`
+    bg-white
+    dark:bg-gray-800
     flex
     flex-col
     md:flex-row
-    md:p-3
+    md:py-3
+    md:px-6
     md:rounded
     cursor-pointer
     border-b
@@ -49,6 +52,9 @@ const Article = styled.div`
     border-t-0
     border-solid
     border-gray-300
+    dark:border-gray-900
+    text-black
+    dark:text-white
   `}
 
   @media screen and (min-width: 768px) {

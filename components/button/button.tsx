@@ -1,9 +1,10 @@
-import { FC, HTMLAttributes } from 'react'
-import tw, { css, styled } from 'twin.macro'
+import { ComponentPropsWithoutRef, FC } from 'react'
+import tw, { styled } from 'twin.macro'
 
 interface ButtonProps {
+  as?: 'a' | 'button'
   size?: 'sm' | 'md' | 'lg'
-  type?: 'default' | 'instagram'
+  theme?: 'default' | 'instagram'
 }
 
 const sizes = {
@@ -12,19 +13,20 @@ const sizes = {
   lg: tw`text-lg`,
 }
 
-const ButtonEl = styled.a`
+const ButtonEl = styled.a<ButtonProps>`
   ${tw`
   rounded-lg
   m-auto
   px-4
   py-3
   cursor-pointer
+  my-3
 `}
   transition: all .2s ease-in-out;
   border: 4px solid rgba(255, 255, 255, 0.5);
 
-  ${({ type }: ButtonProps) => {
-    if (type === 'instagram') {
+  ${({ theme }) => {
+    if (theme === 'instagram') {
       return `color: white;
       background-image: linear-gradient(
         45deg,
@@ -39,24 +41,29 @@ const ButtonEl = styled.a`
     return tw`text-white bg-gradient-to-b from-btn-1 to-btn-2`
   }}
 
-  ${({ size }: ButtonProps) => sizes[size]}
+  ${({ size }) => sizes[size]}
 
   &:hover {
     ${tw`
-    shadow-xl 
+    shadow-xl
     `}
     transform: translateY(-3px) scale(1.02);
   }
+
+  &:disabled {
+    border: 3px solid red;
+  }
 `
 
-const Button: FC<ButtonProps & HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>> = ({
+const Button: FC<ButtonProps & ComponentPropsWithoutRef<'button'>> = ({
   children,
-  type = 'default',
-  size = 'md',
+  as = 'a',
+  theme = 'default',
+  // size = 'md',
   ...props
 }) => {
   return (
-    <ButtonEl size={size} type={type} {...props}>
+    <ButtonEl as={as} theme={theme} {...props}>
       {children}
     </ButtonEl>
   )

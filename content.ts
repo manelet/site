@@ -6,6 +6,9 @@ import { slugify } from './lib/utils'
 import { Article, FindAllArticles } from './@types/articles'
 import { Category } from './@types/category'
 import { MdxRemote } from 'next-mdx-remote/types'
+import imageMetadata from './plugins/image-metadata'
+import unwrapImages from 'remark-unwrap-images'
+import components from './components/mdx'
 
 const root = process.cwd()
 const files = fs.readdirSync(path.join(root, 'content/articles'))
@@ -18,7 +21,14 @@ export const getSlugs = (): string[] => files.map((p) => p.replace(/\.mdx/, ''))
 export const find = async (slug: string): Promise<Article> => {
   const source = fs.readFileSync(path.join(root, 'content/articles', `${slug}.mdx`), 'utf8')
   const { content, data }: GrayMatterFile<string> = matter(source)
-  const mdx: MdxRemote.Source = await renderToString(content, { components: {}, scope: data })
+  const mdx: MdxRemote.Source = await renderToString(content, {
+    components,
+    scope: data,
+    mdxOptions: {
+      rehypePlugins: [imageMetadata],
+      remarkPlugins: [unwrapImages],
+    },
+  })
 
   return { data, mdx } as Article
 }

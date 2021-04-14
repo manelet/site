@@ -1,13 +1,11 @@
 import { FC, SVGProps } from 'react'
-import { useLayout } from '../../layout/state'
 
-export const IconGithub: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24, fill }) => {
-  const {
-    state: { theme },
-  } = useLayout()
-
-  fill = fill || theme === 'dark' ? 'white' : 'black'
-
+export const IconGithub: FC<SVGProps<SVGElement>> = ({
+  width = 24,
+  height = 24,
+  fill = 'black',
+  strokeWidth = 2,
+}) => {
   return (
     <svg
       width={width}
@@ -15,7 +13,7 @@ export const IconGithub: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24, 
       viewBox="0 0 24 24"
       fill="none"
       stroke={fill}
-      strokeWidth="2"
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     >
