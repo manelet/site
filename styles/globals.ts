@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     src: local('Inter'),
          url('/fonts/inter/Inter-Regular.ttf') format('truetype');
     font-weight: 300;
+    font-display: swap;
   }
 
   @font-face {
@@ -14,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
     src: local('Inter'),
          url('/fonts/inter/Inter-ExtraBold.ttf') format('truetype');
     font-weight: 800;
+    font-display: swap;
   }
 
   :root {
