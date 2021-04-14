@@ -1,14 +1,18 @@
-todo
+### todo
 
 - social metas opengraph
-- general links: hrefs, colors etc...
-- google tag manager
+- revisar lighthouse report
 
-bugs
+### bugs
 
+- images not shown on viewoport visible
+- layout blink/flash on dropdown menu open
 - dark theme about tab background color error
 - dark theme flash on page load
 
-roadmap
+### roadmap
 
+- page transitions
+- svg animations
 - next/prev article in article
+- api ig images

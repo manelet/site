@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `
 
 const Toggle = styled.div`
-  ${tw`flex items-center`}
+  ${tw`flex items-center justify-center`}
 `
 
 const Caret = styled.svg`

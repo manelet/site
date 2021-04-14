@@ -10,6 +10,7 @@ import { getSlugs, find } from '../../content'
 import Block from '../../layout/block'
 import { formattedDate } from '../../lib/utils'
 import components from '../../components/mdx'
+import { contentLinks } from '../../styles/fragments'
 
 const ArticlePage: FC<Article> = ({ mdx, data }) => {
   const content = hydrate(mdx, { components })
@@ -20,10 +21,10 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
         <title>{data.title} - Manel Escuer</title>
         <meta name="description" content={data.excerpt} />
       </Head>
-      <Block>
+      <Block customCss={[contentLinks]}>
         <h1 tw="text-4xl text-center">{data.title}</h1>
 
-        <div tw="flex items-center justify-between text-gray-400 my-10">
+        <div tw="flex items-center justify-between text-gray-500 my-10">
           <time tw="text-xs">written {formattedDate(data.date)}</time>
           <div tw="flex items-center">
             <div tw="flex flex-col mr-4">
@@ -39,6 +40,7 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
               style={{ width: '42px', height: '42px', overflow: 'hidden' }}
             >
               <Image
+                alt="Manel author thumbnail"
                 src="/manel-thumb.jpg"
                 layout="fill"
                 tw="pointer-events-none"

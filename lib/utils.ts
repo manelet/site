@@ -4,7 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 dayjs.extend(relativeTime)
 
-export const capitalize = (str): string => str.charAt(0).toUpperCase() + str.slice(1)
+export const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1)
 
 export const slugify = (str: string): string =>
   slugifyIt(
@@ -20,5 +20,7 @@ export const slugify = (str: string): string =>
 export const formattedDate = (date: string): string => {
   const dateObj = dayjs(date, 'MMMM DD, YYYY')
   const numberOfDaysSincePublication = dayjs().diff(dateObj, 'day')
-  return numberOfDaysSincePublication <= 60 ? dateObj.fromNow() : dateObj.format('DD/MM/YY')
+  return numberOfDaysSincePublication <= 60
+    ? dateObj.fromNow()
+    : dateObj.format('dddd, D MMMM YYYY')
 }

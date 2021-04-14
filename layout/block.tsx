@@ -1,8 +1,10 @@
 import { FC } from 'react'
+import { CSSProp } from 'styled-components'
 import tw, { styled } from 'twin.macro'
 
 interface BlockProps {
   as?: keyof HTMLElementTagNameMap
+  customCss?: Array<CSSProp<any>>
 }
 
 export const Wrapper = styled.div`
@@ -26,9 +28,9 @@ export const Inner = styled.div(({ as }: BlockProps) => [
   as === 'header' && tw`flex flex-row place-content-between items-center`,
 ])
 
-const Block: FC<BlockProps> = ({ as = 'section', children }) => {
+const Block: FC<BlockProps> = ({ as = 'section', children, customCss = [] }) => {
   return (
-    <Wrapper as={as}>
+    <Wrapper as={as} css={[...customCss]}>
       <Inner>{children}</Inner>
     </Wrapper>
   )

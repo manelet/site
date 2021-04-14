@@ -159,7 +159,7 @@ export const Timeline: FC = () => {
               </div>
             </TimelineElementLeft>
             <TimelineElementRight>
-              <div tw="max-w-sm md:max-w-sm md:w-full text-gray-400 px-4 -mx-4 py-10 -my-10 rounded-xl">
+              <div tw="max-w-sm md:max-w-sm md:w-full text-gray-500 px-4 -mx-4 py-10 -my-10 rounded-xl">
                 {job.description}
               </div>
             </TimelineElementRight>

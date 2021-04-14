@@ -12,7 +12,7 @@ import { Wrapper, Inner } from '../../layout/block'
 import { getSlugs, find } from '../../projects'
 import projectComponents from '../../components/projects/index'
 import { Wip } from '../../components/wip'
-import { useLayout } from '../../layout/layout'
+import { contentLinks } from '../../styles/fragments'
 
 interface Params extends ParsedUrlQuery {
   slug: string
@@ -69,8 +69,6 @@ const IconLabel: FC<{ label: string }> = ({ children, label }) => {
 const Project: FC<{ project: TProject }> = ({ project }) => {
   const { name, description, call_to_action } = project
   const Content = projectComponents[name]
-  const { state } = useLayout()
-  const fill = state.theme === 'dark' ? 'white' : 'black'
 
   return (
     <>
@@ -86,17 +84,17 @@ const Project: FC<{ project: TProject }> = ({ project }) => {
             <CallToAction>{call_to_action}</CallToAction>
             <div tw="flex w-full justify-end">
               <IconLabel label="Visit site">
-                <IconLink width={18} height={18} fill={fill} />
+                <IconLink width={18} height={18} fill="white" />
               </IconLabel>
 
               <IconLabel label="Github">
-                <IconGithub width={18} height={18} fill={fill} />
+                <IconGithub width={18} height={18} fill="white" />
               </IconLabel>
             </div>
           </div>
         </Inner>
       </ProjectHeaderWrapper>
-      <Wrapper>
+      <Wrapper css={[contentLinks]}>
         <Inner>{Content ? <Content /> : <Wip />}</Inner>
       </Wrapper>
     </>

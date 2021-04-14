@@ -13,6 +13,7 @@ import { Project } from '../@types/projects'
 import Block, { Wrapper, Inner } from '../layout/block'
 import Button from '../components/button/button'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Instagram = dynamic(() => import('../components/instagram'), { ssr: false })
 
@@ -37,7 +38,7 @@ const ImageWrapper = styled.div`
 `
 
 const MyInner = styled(Inner)`
-  ${tw`items-center md:items-start justify-start md:justify-center h-full`}
+  ${tw`items-center md:items-start justify-start md:justify-center! h-full`}
 `
 
 const GrayBlock = styled.div`
@@ -61,7 +62,13 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
           <p>Frontend engineer and wannapreneur</p>
           <ImageWrapper>
             <div>
-              <Image src="/manelet.webp" width={1000} height={1500} layout="responsive" />
+              <Image
+                alt="Manel welcome image"
+                src="/manelet.webp"
+                width={1000}
+                height={1500}
+                layout="responsive"
+              />
             </div>
           </ImageWrapper>
         </MyInner>
@@ -72,7 +79,10 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
           <div tw="py-6">
             <ArticleList title="Recently published" articles={articles} />
           </div>
-          <Button as="a">Read&apos;em all</Button>
+
+          <Link href="/articles">
+            <Button as="a">Read&apos;em all</Button>
+          </Link>
         </Block>
 
         <Wrapper>
@@ -89,7 +99,9 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
 
               <ProjectsOverview projects={projects} />
 
-              <Button as="a">View&apos;em all</Button>
+              <Link href="/projects">
+                <Button as="a">View&apos;em all</Button>
+              </Link>
             </>
           </Inner>
         </Wrapper>

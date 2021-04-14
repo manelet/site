@@ -101,10 +101,20 @@ const Menu: FC = () => {
 
         <MenuIcons>
           <ThemeToggler width={iconSize} height={iconSize} />
-          <a href="https://twitter.com/manelescuer" target="_blank" rel="noreferrer">
+          <a
+            title="twitter profile"
+            href="https://twitter.com/manelescuer"
+            target="_blank"
+            rel="noreferrer"
+          >
             <IconTwitter width={iconSize} height={iconSize} fill={fill} />
           </a>
-          <a href="https://github.com/manelet" target="_blank" rel="noreferrer">
+          <a
+            title="github profile"
+            href="https://github.com/manelet"
+            target="_blank"
+            rel="noreferrer"
+          >
             <IconGithub width={iconSize} height={iconSize} fill={fill} />
           </a>
         </MenuIcons>
@@ -121,6 +131,8 @@ const MenuLink = styled.a`
   ${tw`
   cursor-pointer
   text-3xl
+  text-black
+  dark:text-white
   font-extrabold
   md:text-base
   md:font-normal

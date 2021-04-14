@@ -9,10 +9,20 @@ export const Entrepreneurship: FC = () => {
       <Content>
         <ImageWrapper>
           <div>
-            <Image src="/about/butonet1.jpg" width={720} height={960} />
+            <Image
+              alt="Butonet image machines"
+              src="/about/butonet1.jpg"
+              width={720}
+              height={960}
+            />
           </div>
           <div tw="md:absolute md:-bottom-10 md:-right-10 z-10" style={{ maxWidth: '300px' }}>
-            <Image src="/about/butonet2.jpg" width={500} height={333} />
+            <Image
+              alt="Butonet image client Nocilla"
+              src="/about/butonet2.jpg"
+              width={500}
+              height={333}
+            />
           </div>
         </ImageWrapper>
         <ContentWrapper>

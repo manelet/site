@@ -68,7 +68,7 @@ const Article = styled.div`
 `
 
 const Date = styled.time`
-  ${tw`hidden items-center w-full text-gray-400 mr-10`}
+  ${tw`hidden items-center w-full text-gray-500 mr-10`}
 
   @media screen and (min-width: 768px) {
     ${tw`flex visible`}

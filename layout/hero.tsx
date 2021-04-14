@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styled from 'styled-components'
+import tw, { styled } from 'twin.macro'
 import { Wrapper } from './block'
 
 interface HeroProps {
@@ -7,11 +7,10 @@ interface HeroProps {
 }
 
 const HeroWrapper = styled(Wrapper)`
-  position: relative;
-  width: 100%;
+  ${tw`relative w-full justify-center!`}
+
   height: ${({ stripHeaderHeight }: HeroProps) =>
     stripHeaderHeight ? 'calc(100vh - 60px)' : '100vh'};
-  justify-content: center;
 `
 
 const Hero: FC<HeroProps> = ({ children, stripHeaderHeight = true }) => {

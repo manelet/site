@@ -12,10 +12,22 @@ export const Beginnings: FC = () => {
             tw="md:right-0 md:absolute md:self-end z-10"
             style={{ maxWidth: '200px', bottom: '-3rem' }}
           >
-            <Image src="/about/manel-football.jpg" width={500} height={715} layout="responsive" />
+            <Image
+              alt="Young Manel playing football"
+              src="/about/manel-football.jpg"
+              width={500}
+              height={715}
+              layout="responsive"
+            />
           </div>
           <div tw="relative w-full" style={{ maxWidth: '320px' }}>
-            <Image src="/about/manel-computer.jpg" width={500} height={632} layout="responsive" />
+            <Image
+              alt="Young Manel playing computer games"
+              src="/about/manel-computer.jpg"
+              width={500}
+              height={632}
+              layout="responsive"
+            />
           </div>
         </ImageWrapper>
         <ContentWrapper>
@@ -57,11 +69,23 @@ export const Beginnings: FC = () => {
         </ContentWrapper>
         <ImageWrapper tw="md:flex-col">
           <div>
-            <Image src="/about/frontpage.jpg" width={640} height={480} layout="responsive" />
+            <Image
+              alt="Windows FrontPage CD Rom"
+              src="/about/frontpage.jpg"
+              width={640}
+              height={480}
+              layout="responsive"
+            />
           </div>
 
           <div tw="md:absolute md:-bottom-20 md:-right-10" style={{ maxWidth: '200px' }}>
-            <Image src="/about/counter-strike.jpg" width={1024} height={750} layout="responsive" />
+            <Image
+              alt="Counter-Strike game initial screen"
+              src="/about/counter-strike.jpg"
+              width={1024}
+              height={750}
+              layout="responsive"
+            />
           </div>
         </ImageWrapper>
       </Content>

@@ -1,4 +1,4 @@
-import { styled } from 'twin.macro'
+import tw, { styled } from 'twin.macro'
 import Logo from './logo'
 import { Wrapper, Inner } from './block'
 import Menu from './menu'
@@ -23,9 +23,7 @@ const HeaderWrapper = styled(Wrapper)`
 `
 
 const HeaderInner = styled(Inner)`
-  z-index: 20;
-  flex-direction: row;
-  justify-content: space-between;
+  ${tw`z-20 flex-row! justify-between!`}
 `
 
 const Header: FC = () => {
