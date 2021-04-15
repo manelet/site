@@ -1,7 +1,7 @@
 ### todo
 
 - social metas opengraph
-- revisar lighthouse report
+- placeholder texts
 
 ### bugs
 
