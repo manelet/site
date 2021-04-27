@@ -1,7 +1,7 @@
-import { ComponentPropsWithoutRef, FC } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 import tw, { styled } from 'twin.macro'
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   as?: 'a' | 'button'
   size?: 'sm' | 'md' | 'lg'
   theme?: 'default' | 'instagram'
@@ -55,18 +55,17 @@ const ButtonEl = styled.a<ButtonProps>`
   }
 `
 
-const Button: FC<ButtonProps & ComponentPropsWithoutRef<'button'>> = ({
-  children,
-  as = 'a',
-  theme = 'default',
-  // size = 'md',
-  ...props
-}) => {
-  return (
-    <ButtonEl as={as} theme={theme} {...props}>
-      {children}
-    </ButtonEl>
-  )
-}
+// TODO: Fix this annoying any
+const Button = forwardRef<any, ButtonProps>(
+  ({ children, as = 'a', theme = 'default', ...props }, ref) => {
+    return (
+      <ButtonEl as={as} theme={theme} ref={ref} {...props}>
+        {children}
+      </ButtonEl>
+    )
+  }
+)
+
+Button.displayName = 'Button'
 
 export default Button

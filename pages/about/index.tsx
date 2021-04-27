@@ -35,6 +35,8 @@ const Tab = styled.a`
     p-3
     cursor-pointer
     text-xs
+    bg-transparent
+    dark:bg-transparent
   `}
 
   transition: all .25s ease-in-out;
@@ -73,7 +75,6 @@ const observerOptions = {
 const About: FC = () => {
   const sectionRefs = useRef([])
   const [active, setActive] = useState(`#${sectionNames[0].toLowerCase()}`)
-  const isActive = (section: string): boolean => section === active
   const goToSection = (e: MouseEvent<HTMLAnchorElement>): void => {
     e.preventDefault()
     const href = e.currentTarget.getAttribute('href')
@@ -125,14 +126,10 @@ const About: FC = () => {
             const id = `#${section.toLowerCase()}`
             return (
               <Tab
-                key={`tab-${id}`}
+                key={`tab-${section.toLowerCase()}`}
                 href={id}
                 onClick={goToSection}
-                css={[
-                  isActive(id)
-                    ? tw`bg-gray-100 dark:bg-gray-800`
-                    : tw`bg-transparent dark:bg-transparent`,
-                ]}
+                css={[id === active && tw`bg-gray-100 dark:bg-gray-800`]}
               >
                 {section}
               </Tab>

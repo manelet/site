@@ -1,41 +1,35 @@
-import { createRef, useState, useCallback, useLayoutEffect, RefObject } from 'react'
+import { useState, RefObject, createContext, useContext, FC, useRef, useCallback } from 'react'
 
 interface UseDropdown {
-  isHovered: boolean
-  toggleIsHovered: (isHovered: boolean) => void
-  open: boolean
-  refs: Record<string, RefObject<HTMLDivElement>>
+  isOpen: boolean
+  refs?: Record<string, RefObject<HTMLDivElement>>
+  toggleMenu?: () => void
+  openMenu?: () => void
+  closeMenu?: () => void
 }
 
-const refs = {
-  wrapper: createRef<HTMLDivElement>(),
-  toggle: createRef<HTMLDivElement>(),
-  menu: createRef<HTMLDivElement>(),
+const DropdownContext = createContext<UseDropdown>({ isOpen: false })
+
+export const Provider: FC = ({ children }) => {
+  const [isOpen, toggleOpen] = useState(false)
+
+  const refs = {
+    wrapper: useRef<HTMLDivElement>(),
+    toggle: useRef<HTMLDivElement>(),
+    menu: useRef<HTMLDivElement>(),
+  }
+
+  const openMenu = useCallback((): void => !isOpen && toggleOpen(true), [toggleOpen, isOpen])
+  const closeMenu = useCallback((): void => isOpen && toggleOpen(false), [toggleOpen, isOpen])
+  const toggleMenu = useCallback((): void => toggleOpen(!isOpen), [toggleOpen, isOpen])
+
+  return (
+    <DropdownContext.Provider value={{ isOpen, refs, openMenu, closeMenu, toggleMenu }}>
+      {children}
+    </DropdownContext.Provider>
+  )
 }
 
 export function useDropdown(): UseDropdown {
-  const [open, toggleOpen] = useState(false)
-  const [isHovered, toggleIsHovered] = useState(false)
-
-  const onMouseOut = useCallback(() => {
-    toggleOpen(false)
-  }, [])
-
-  const onMouseOver = useCallback(() => {
-    toggleOpen(true)
-  }, [])
-
-  useLayoutEffect(() => {
-    refs.wrapper.current.addEventListener('mouseenter', onMouseOver)
-    refs.wrapper.current.addEventListener('mouseleave', onMouseOut)
-
-    return () => {
-      refs.wrapper.current.removeEventListener('mouseenter', onMouseOver)
-      refs.wrapper.current.removeEventListener('mouseleave', onMouseOut)
-    }
-
-    // eslint-disable-next-line
-  }, [])
-
-  return { refs, isHovered, toggleIsHovered, open }
+  return useContext(DropdownContext)
 }

@@ -18,19 +18,20 @@ const getContents = async (): Promise<Article[]> =>
 
 export const getSlugs = (): string[] => files.map((p) => p.replace(/\.mdx/, ''))
 
-export const find = async (slug: string): Promise<Article> => {
+export const find = async (slug: string | string[]): Promise<Article> => {
   const source = fs.readFileSync(path.join(root, 'content/articles', `${slug}.mdx`), 'utf8')
   const { content, data }: GrayMatterFile<string> = matter(source)
+  const dataWithSlug = { ...data, slug }
   const mdx: MdxRemote.Source = await renderToString(content, {
     components,
-    scope: data,
+    scope: dataWithSlug,
     mdxOptions: {
       rehypePlugins: [imageMetadata],
       remarkPlugins: [unwrapImages],
     },
   })
 
-  return { data, mdx } as Article
+  return { data: dataWithSlug, mdx } as Article
 }
 
 export const getCategories = async (): Promise<Category[]> => {

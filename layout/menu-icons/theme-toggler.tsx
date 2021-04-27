@@ -1,6 +1,6 @@
-import { useLayout } from '../state'
 import { useSpring, animated } from 'react-spring'
 import { FC, SVGProps } from 'react'
+import { useTheme } from 'next-themes'
 
 const animation = {
   dark: {
@@ -21,10 +21,7 @@ const animation = {
 }
 
 const ThemeToggler: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24 }) => {
-  const {
-    state: { theme },
-    actions: { updateTheme },
-  } = useLayout()
+  const { theme, setTheme } = useTheme()
   const isDark = theme === 'dark'
   const fill = isDark ? 'white' : 'black'
   const { r, transform, cx, cy, opacity } = animation[isDark ? 'dark' : 'light']
@@ -35,7 +32,7 @@ const ThemeToggler: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24 }) => 
 
   return (
     <animated.svg
-      onClick={() => updateTheme(isDark ? 'light' : 'dark')}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
       width={width}
       height={height}
       viewBox="0 0 24 24"

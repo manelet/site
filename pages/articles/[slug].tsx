@@ -20,6 +20,7 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
       <Head>
         <title>{data.title} - Manel Escuer</title>
         <meta name="description" content={data.excerpt} />
+        <meta property="og:image" content={`api/image-preview?slug=${data.slug}`} />
       </Head>
       <Block customCss={[contentLinks]}>
         <h1 tw="text-4xl text-center">{data.title}</h1>

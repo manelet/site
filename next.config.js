@@ -13,5 +13,8 @@ module.exports = {
     sendgrid: {
       key: process.env.SENDGRID_API_KEY,
     },
+    instagram: {
+      token: process.env.INSTAGRAM_ACCESS_TOKEN,
+    },
   },
 }

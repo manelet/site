@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import got from 'got'
+import getConfig from 'next/config'
+
+const { serverRuntimeConfig } = getConfig()
 
 export interface InstagramApiItem {
   permalink: string
@@ -27,7 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     }: {
       body: InstagramApiResponse
     } = await got(
-      'https://graph.instagram.com/me/media?fields=permalink,thumbnail_url,media_url,caption&access_token=IGQVJWaTBsaXFRbnRmdkFrUjBWbk1rdEtjb2N5YzhtSFo5a3ZAScHMwOW5MNWZAER1NjM0ZACZA1JhblVUbE8zUjU5dzlLWVdOZAjlFWXJvbUN4ZAXNpUzhCcy1lM28zMHc5YlNZAdlBTMV9B',
+      `https://graph.instagram.com/me/media?fields=permalink,thumbnail_url,media_url,caption&access_token=${serverRuntimeConfig.instagram.token}`,
       { responseType: 'json' }
     )
     res.statusCode = 200

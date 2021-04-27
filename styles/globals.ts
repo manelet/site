@@ -34,7 +34,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    ${tw`bg-first dark:bg-second text-second dark:text-first`}
+    ${tw`bg-white dark:bg-black text-gray-900 dark:text-white`}
   }
 
   #__next {
@@ -48,5 +48,9 @@ export const GlobalStyles = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+  }
+
+  ::selection {
+    ${tw`bg-pink-500 text-white`}
   }
 `

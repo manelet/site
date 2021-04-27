@@ -15,15 +15,15 @@ interface FormInputs {
 }
 
 const ContactWrapper = styled(Wrapper)`
-  ${tw`flex-grow bg-gray-50 dark:bg-second`}
+  ${tw`flex-grow bg-gray-50 dark:bg-black`}
 `
 
 const Form = styled.form`
-  ${tw`w-full bg-white dark:bg-gray-800 p-6 md:shadow-2xl rounded md:rounded-lg my-10`}
+  ${tw`w-full bg-white dark:bg-gray-900 p-6 md:shadow-2xl rounded md:rounded-lg my-10`}
 `
 
 const Input = styled.input`
-  ${tw`p-2 border border-solid border-gray-200 dark:border-gray-700 w-full bg-white dark:bg-gray-700`}
+  ${tw`p-2 border border-solid border-gray-200 dark:border-gray-800 w-full bg-white dark:bg-gray-800`}
 
   &::placeholder {
     ${tw`text-gray-300`}
@@ -31,13 +31,13 @@ const Input = styled.input`
 `
 
 const Hr = styled.hr`
-  ${tw`border border-solid border-gray-100 dark:border-second my-5`}
+  ${tw`border border-solid border-gray-100 dark:border-gray-800 my-5`}
   border-bottom: 0;
 `
 
 const Textarea = styled.textarea`
   font-family: 'Inter', sans-serif;
-  ${tw`border border-solid border-gray-100 dark:border-gray-700 rounded w-full p-4 bg-white dark:bg-gray-700`}
+  ${tw`border border-solid border-gray-100 dark:border-gray-800 rounded w-full p-4 bg-white dark:bg-gray-800`}
 
   &::placeholder {
     ${tw`text-gray-300`}

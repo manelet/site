@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
 import { FC } from 'react'
+import { ThemeProvider } from 'next-themes'
 import Layout, { Provider } from '../layout/layout'
 import { GlobalStyles } from '../styles/globals'
 
@@ -13,11 +14,13 @@ const App: FC<AppPropsEnhanced> = ({ Component, pageProps, theme }) => {
   return (
     <>
       <GlobalStyles />
-      <Provider theme={theme}>
-        <Layout background={pageProps.project?.background}>
-          <Component {...pageProps} />
-        </Layout>
-      </Provider>
+      <ThemeProvider attribute="class">
+        <Provider theme={theme}>
+          <Layout background={pageProps.project?.background}>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
+      </ThemeProvider>
     </>
   )
 }

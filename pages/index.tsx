@@ -42,7 +42,7 @@ const MyInner = styled(Inner)`
 `
 
 const GrayBlock = styled.div`
-  ${tw`bg-gray-50 dark:bg-gray-900 border-0 border-t border-b border-gray-100 dark:border-gray-700 border-solid`}
+  ${tw`bg-gray-50 dark:bg-gray-900 border-0 border-t border-b border-gray-100 dark:border-gray-800 border-solid`}
 `
 
 const Home: FC<HomeProps> = ({ articles, projects }) => {
@@ -56,10 +56,24 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
         />
       </Head>
 
-      <Hero stripHeaderHeight>
+      <Hero>
         <MyInner>
-          <h1 tw="text-5xl mb-0">Manel Escuer</h1>
-          <p>Frontend engineer and wannapreneur</p>
+          <div tw="w-full md:max-w-sm">
+            <h1 tw="text-5xl mb-0">Manel Escuer</h1>
+            <p>
+              Frontend engineer for{' '}
+              <a
+                tw="text-green-600"
+                href="https://abacum.io"
+                target="_blank"
+                title="Abacum"
+                rel="noreferrer"
+              >
+                Abacum
+              </a>{' '}
+              &amp; Product lover with and entrepreneur spirit
+            </p>
+          </div>
           <ImageWrapper>
             <div>
               <Image
@@ -91,9 +105,12 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
               <div tw="w-full flex flex-col justify-center">
                 <h2>Projects</h2>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe accusamus
-                  distinctio ad ex quos deleniti error neque, fuga eveniet, corrupti accusantium,
-                  doloremque recusandae quidem qui nemo vitae nihil delectus iste.
+                  I do love to start new projects on my spare time, sometimes to try out new
+                  technologies some other times because I believe I&apos;ll get rich. Anyway I
+                  usually don&apos;t finish them, but I do my best!{' '}
+                  <span role="img" aria-label="unsfinished">
+                    😅
+                  </span>
                 </p>
               </div>
 

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import tw, { styled } from 'twin.macro'
 
 import { Article as TArticle } from '../@types/articles'
-import { slugify, formattedDate } from '../lib/utils'
+import { formattedDate } from '../lib/utils'
 
 const ArticleList: FC<{ title: string; articles: TArticle[] }> = ({
   title = null,
@@ -17,7 +17,7 @@ const ArticleList: FC<{ title: string; articles: TArticle[] }> = ({
       {title && <h2 tw="text-xl">{title}</h2>}
 
       {articles.map(({ data }, i) => {
-        const slug = `/articles/${slugify(data.title)}`
+        const slug = `/articles/${data.slug}`
 
         return (
           <Article key={`post-list-${i}`} onClick={() => push(slug)}>

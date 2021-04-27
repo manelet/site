@@ -58,8 +58,8 @@ const ProjectsWrapper = styled.div`
     h-full
     right-0
     bg-gradient-to-l
-    dark:from-second
-    from-first
+    dark:from-gray-800
+    from-white
     to-transparent
     `}
 
@@ -77,7 +77,7 @@ const ProjectsWrapperInner = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    ${tw`bg-gray-50 dark:bg-second`}
+    ${tw`bg-gray-50 dark:bg-gray-800`}
   }
 
   ::-webkit-scrollbar-thumb {

@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import { useWindowWidth } from '@react-hook/window-size'
+import { useTheme } from 'next-themes'
 
 import { IconTwitter } from '../components/icons/twitter'
 import { IconGithub } from '../components/icons/github'
@@ -23,38 +24,20 @@ const Menu: FC = () => {
   const [categories, setCategories] = useState<Category[]>([])
   const router = useRouter()
   const width = useWindowWidth()
+  const { theme } = useTheme()
   const {
-    state: { showMobileMenu, theme },
+    state: { showMobileMenu },
     actions: { toggleMobileMenu },
   } = useLayout()
   const fill = theme === 'dark' ? 'white' : 'black'
-  // const ref = useRef(null)
   const isMobile = width && width <= 768
   const iconSize = isMobile ? 24 : 18
-  // const styles = useSpring({
-  //   opacity: showMobileMenu ? 1 : 0,
-  //   config: { duration: 350 },
-  //   onStart(): void {
-  //     if (ref.current && showMobileMenu && isMobile) {
-  //       ref.current.style.visibility = 'visible'
-  //     }
-  //   },
-  //   onRest({ opacity }) {
-  //     if (!opacity && isMobile) {
-  //       ref.current.style.visibility = 'hidden'
-  //     }
-  //   },
-  // })
 
   useEffect(() => {
     fetch('/api/categories')
       .then((r) => r.json())
       .then(setCategories)
   }, [])
-
-  // useEffect(() => {
-  //   ref.current.style.visibility = width < 768 ? 'hidden' : 'visible'
-  // }, [width])
 
   useEffect(() => {
     const handleRouteChange = (): void => {
@@ -70,7 +53,7 @@ const Menu: FC = () => {
 
   return (
     <>
-      <Nav css={[isMobile && showMobileMenu && tw`visible opacity-100`]}>
+      <Nav css={[showMobileMenu && tw`visible opacity-100`]}>
         <div tw="md:not-last-of-type:mr-10">
           <Dropdown>
             <DropdownToggle>
@@ -125,7 +108,6 @@ const Menu: FC = () => {
 }
 
 const MenuIcons = dynamic(() => import('./menu-icons/menu-icons'), { ssr: false })
-// const ThemeToggler = dynamic(() => import('./theme-toggler'), { ssr: false })
 
 const MenuLink = styled.a`
   ${tw`

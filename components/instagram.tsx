@@ -22,10 +22,18 @@ const Instagram: FC = () => {
       setImages(cachedImages)
     } else {
       fetch('/api/instagram')
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json()
+          }
+
+          return null
+        })
         .then((images) => {
-          setCache(images)
-          setImages(images)
+          if (images) {
+            setCache(images)
+            setImages(images)
+          }
         })
     }
   }, [])
@@ -49,19 +57,21 @@ const Instagram: FC = () => {
         >
           {images &&
             images.length &&
-            images.map((image, i) => (
-              <ImgWrapper key={`ig-img-${i}`}>
-                <a href={image.permalink} target="_blank" title={image.caption} rel="noreferrer">
-                  <Img
-                    width={128}
-                    height={128}
-                    src={image.media_url}
-                    alt={image.id}
-                    title={image.caption}
-                  />
-                </a>
-              </ImgWrapper>
-            ))}
+            images.map((image, i) => {
+              return (
+                <ImgWrapper key={`ig-img-${i}`}>
+                  <a href={image.permalink} target="_blank" title={image.caption} rel="noreferrer">
+                    <Img
+                      width={128}
+                      height={128}
+                      src={image.media_url}
+                      alt={image.id}
+                      title={image.caption}
+                    />
+                  </a>
+                </ImgWrapper>
+              )
+            })}
         </div>
       </div>
     </Block>
@@ -88,7 +98,7 @@ function getCached(): boolean | InstagramApiItem[] {
       return false
     }
 
-    const diff = dayjs(cache.date).diff(dayjs(), 'hour')
+    const diff = dayjs().diff(dayjs(cache.date), 'hour')
 
     if (diff >= 12) {
       localStorage.removeItem(LS_KEY)
