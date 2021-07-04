@@ -2,10 +2,6 @@
 
 - social metas opengraph
 
-### bugs
-
-- dark theme about tab background color error
-
 ### roadmap
 
 - page transitions

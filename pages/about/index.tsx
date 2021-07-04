@@ -39,6 +39,9 @@ const Tab = styled.a`
     dark:bg-transparent
   `}
 
+  ${({ active }: { active: boolean }) =>
+    active ? tw`bg-gray-100 dark:bg-gray-800` : tw`bg-transparent dark:bg-transparent`}
+
   transition: all .25s ease-in-out;
 
   &:not(:last-of-type) {
@@ -50,7 +53,7 @@ const TabWrapper = styled.div`
   ${tw`flex w-full sticky pb-3`}
   top: calc(var(--nav-height));
   margin-top: -0.75rem;
-  z-index: 10;
+  z-index: 90;
 
   :before {
     content: '';
@@ -124,12 +127,13 @@ const About: FC = () => {
         <TabWrapper>
           {sectionNames.map((section) => {
             const id = `#${section.toLowerCase()}`
+
             return (
               <Tab
+                active={active === id}
                 key={`tab-${section.toLowerCase()}`}
                 href={id}
                 onClick={goToSection}
-                css={[id === active && tw`bg-gray-100 dark:bg-gray-800`]}
               >
                 {section}
               </Tab>

@@ -14,7 +14,7 @@ const App: FC<AppPropsEnhanced> = ({ Component, pageProps, theme }) => {
   return (
     <>
       <GlobalStyles />
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" enableSystem={false}>
         <Provider theme={theme}>
           <Layout background={pageProps.project?.background}>
             <Component {...pageProps} />

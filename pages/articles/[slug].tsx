@@ -1,10 +1,11 @@
 import 'twin.macro'
+import getConfig from 'next/config'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import hydrate from 'next-mdx-remote/hydrate'
 import Image from 'next/image'
 import { FC } from 'react'
-import { Article } from '../../@types/articles'
+import { Article, ArticleData } from '../../@types/articles'
 
 import { getSlugs, find } from '../../content'
 import Block from '../../layout/block'
@@ -12,15 +13,29 @@ import { formattedDate } from '../../lib/utils'
 import components from '../../components/mdx'
 import { contentLinks } from '../../styles/fragments'
 
+const { baseUrl, ogBaseUrl } = getConfig().publicRuntimeConfig
+
+function buildOgUrl(data: ArticleData): string {
+  const urlData = {
+    image: `${baseUrl}${data.image.src}` ?? 'undefined',
+    image_width: (data.image?.width ?? 'undefined') as string,
+    image_height: (data.image.height ?? 'undefined') as string,
+    excerpt: data.excerpt ?? 'undefined',
+    date: data.date,
+  }
+  return ogBaseUrl + data.title + '?' + new URLSearchParams(urlData)
+}
+
 const ArticlePage: FC<Article> = ({ mdx, data }) => {
   const content = hydrate(mdx, { components })
+  const ogUrl = buildOgUrl(data)
 
   return (
     <>
       <Head>
         <title>{data.title} - Manel Escuer</title>
         <meta name="description" content={data.excerpt} />
-        <meta property="og:image" content={`api/image-preview?slug=${data.slug}`} />
+        <meta property="og:image" content={ogUrl} />
       </Head>
       <Block customCss={[contentLinks]}>
         <h1 tw="text-4xl text-center">{data.title}</h1>

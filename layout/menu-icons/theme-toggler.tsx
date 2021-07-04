@@ -24,7 +24,7 @@ const ThemeToggler: FC<SVGProps<SVGElement>> = ({ width = 24, height = 24 }) => 
   const { theme, setTheme } = useTheme()
   const isDark = theme === 'dark'
   const fill = isDark ? 'white' : 'black'
-  const { r, transform, cx, cy, opacity } = animation[isDark ? 'dark' : 'light']
+  const { r, transform, cx, cy, opacity } = animation[!isDark ? 'dark' : 'light']
   const svgContainerProps = useSpring({ transform, config: animation.springConfig })
   const centerCircleProps: any = useSpring({ r, config: animation.springConfig }) // eslint-disable-line
   const maskedCircleProps: any = useSpring({ cx, cy, config: animation.springConfig }) // eslint-disable-line

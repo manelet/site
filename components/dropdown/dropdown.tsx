@@ -121,7 +121,11 @@ const DropdownToggle: FC<DropdownState> = ({ children, ...props }) => {
   const { toggleMenu, isOpen, openMenu } = useDropdown()
 
   return (
-    <div tw="flex items-center cursor-pointer" onMouseOver={openMenu} onFocus={() => void 0}>
+    <div
+      tw="flex justify-center items-center cursor-pointer"
+      onMouseOver={openMenu}
+      onFocus={() => void 0}
+    >
       <Toggle className="dd-toggle" {...props}>
         {children}
       </Toggle>

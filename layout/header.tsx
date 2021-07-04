@@ -9,7 +9,7 @@ const HeaderWrapper = styled(Wrapper)`
   position: sticky;
   top: 0;
   background-color: transparent;
-  z-index: 20;
+  z-index: 200;
 
   :before {
     content: '';

@@ -9,6 +9,11 @@ module.exports = {
 
   images: { domains: ['scontent-mad1-1.cdninstagram.com'] },
 
+  publicRuntimeConfig: {
+    ogBaseUrl: process.env.OG_URL,
+    baseUrl: process.env.BASE_URL,
+  },
+
   serverRuntimeConfig: {
     sendgrid: {
       key: process.env.SENDGRID_API_KEY,

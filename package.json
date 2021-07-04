@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx && npm run check-types",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@react-hook/window-size": "^3.0.7",
     "@sendgrid/mail": "^7.4.2",
+    "cloudmersive-convert-api-client": "^2.6.5",
     "clsx": "^1.1.1",
     "cookie-parser": "^1.4.5",
     "dayjs": "^1.10.3",
@@ -32,6 +33,7 @@
     "react-spring": "^8.0.27",
     "remark-unwrap-images": "^2.0.0",
     "remove": "^0.1.5",
+    "sharp": "^0.28.1",
     "str": "^0.7.1",
     "svg2img": "^0.9.2",
     "unist-util-visit": "^2.0.3"

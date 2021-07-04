@@ -60,18 +60,9 @@ const Home: FC<HomeProps> = ({ articles, projects }) => {
         <MyInner>
           <div tw="w-full md:max-w-sm">
             <h1 tw="text-5xl mb-0">Manel Escuer</h1>
-            <p>
-              Frontend engineer for{' '}
-              <a
-                tw="text-green-600"
-                href="https://abacum.io"
-                target="_blank"
-                title="Abacum"
-                rel="noreferrer"
-              >
-                Abacum
-              </a>{' '}
-              &amp; Product lover with and entrepreneur spirit
+            <p tw="text-xl">
+              Frontend engineer with eagerness to learn and improve &amp; Product lover with and
+              entrepreneur spirit
             </p>
           </div>
           <ImageWrapper>
