@@ -13,7 +13,7 @@ const sizes = {
   lg: tw`text-lg`,
 }
 
-const ButtonEl = styled.a<ButtonProps>`
+const ButtonEl = styled.a`
   ${tw`
   rounded-lg
   m-auto
@@ -41,7 +41,7 @@ const ButtonEl = styled.a<ButtonProps>`
     return tw`text-white bg-gradient-to-b from-btn-1 to-btn-2`
   }}
 
-  ${({ size }) => sizes[size]}
+  ${({ size }: ButtonProps) => sizes[size]}
 
   &:hover {
     ${tw`
@@ -56,15 +56,11 @@ const ButtonEl = styled.a<ButtonProps>`
 `
 
 // TODO: Fix this annoying any
-const Button = forwardRef<any, ButtonProps>(
-  ({ children, as = 'a', theme = 'default', ...props }, ref) => {
-    return (
-      <ButtonEl as={as} theme={theme} ref={ref} {...props}>
-        {children}
-      </ButtonEl>
-    )
-  }
-)
+const Button = forwardRef<any, any>((props, ref) => (
+  <ButtonEl {...props} ref={ref}>
+    {props.children}
+  </ButtonEl>
+))
 
 Button.displayName = 'Button'
 
