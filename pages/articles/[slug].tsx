@@ -2,7 +2,8 @@ import 'twin.macro'
 import getConfig from 'next/config'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import hydrate from 'next-mdx-remote/hydrate'
+import { MDXRemote } from 'next-mdx-remote'
+
 import Image from 'next/image'
 import { FC } from 'react'
 import { Article, ArticleData } from '../../@types/articles'
@@ -27,7 +28,6 @@ function buildOgUrl(data: ArticleData): string {
 }
 
 const ArticlePage: FC<Article> = ({ mdx, data }) => {
-  const content = hydrate(mdx, { components })
   const ogUrl = buildOgUrl(data)
 
   return (
@@ -66,7 +66,7 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
             </div>
           </div>
         </div>
-        <>{content}</>
+        <MDXRemote {...mdx} components={components} />
       </Block>
     </>
   )
