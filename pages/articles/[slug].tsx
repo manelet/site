@@ -13,17 +13,17 @@ import { formattedDate } from '../../lib/utils'
 import components from '../../components/mdx'
 import { contentLinks } from '../../styles/fragments'
 
-const config = getConfig().publicRuntimeConfig
+const { ogBaseUrl, baseUrl } = getConfig().publicRuntimeConfig
 
 function buildOgUrl(data: ArticleData): string {
   const urlData = {
-    image: `${config.baseUrl}${data.image.src}` ?? 'undefined',
+    image: `${baseUrl}${data.image.src}` ?? 'undefined',
     image_width: (data.image?.width ?? 'undefined') as string,
     image_height: (data.image.height ?? 'undefined') as string,
     excerpt: data.excerpt ?? 'undefined',
     date: data.date,
   }
-  return config.ogBaseUrl + data.title + '?' + new URLSearchParams(urlData)
+  return ogBaseUrl + data.title + '?' + new URLSearchParams(urlData)
 }
 
 const ArticlePage: FC<Article> = ({ mdx, data }) => {
