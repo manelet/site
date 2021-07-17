@@ -1,14 +1,12 @@
-import renderToString from 'next-mdx-remote/render-to-string'
+import { serialize } from 'next-mdx-remote/serialize'
 import matter, { GrayMatterFile } from 'gray-matter'
 import fs from 'fs'
 import path from 'path'
 import { slugify } from './lib/utils'
 import { Article, FindAllArticles } from './@types/articles'
 import { Category } from './@types/category'
-import { MdxRemote } from 'next-mdx-remote/types'
 import imageMetadata from './plugins/image-metadata'
 import unwrapImages from 'remark-unwrap-images'
-import components from './components/mdx'
 
 const root = process.cwd()
 const files = fs.readdirSync(path.join(root, 'content/articles'))
@@ -22,8 +20,7 @@ export const find = async (slug: string | string[]): Promise<Article> => {
   const source = fs.readFileSync(path.join(root, 'content/articles', `${slug}.mdx`), 'utf8')
   const { content, data }: GrayMatterFile<string> = matter(source)
   const dataWithSlug = { ...data, slug }
-  const mdx: MdxRemote.Source = await renderToString(content, {
-    components,
+  const mdx = await serialize(content, {
     scope: dataWithSlug,
     mdxOptions: {
       rehypePlugins: [imageMetadata],
