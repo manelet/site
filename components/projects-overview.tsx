@@ -38,7 +38,8 @@ const ProjectsWrapper = styled.div`
   relative
   flex
   py-2
-  -mr-10
+  -mr-4
+  md:-mr-10
   md:py-0
   md:mr-0
   md:w-full
