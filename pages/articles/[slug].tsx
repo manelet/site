@@ -16,15 +16,28 @@ import { contentLinks } from '../../styles/fragments'
 
 const { ogBaseUrl, baseUrl } = getConfig().publicRuntimeConfig
 
+interface UrlParams {
+  date: string
+  excerpt: string
+  image?: string
+  image_width?: string
+  image_height?: string
+}
+
 function buildOgUrl(data: ArticleData): string {
-  const urlData = {
-    image: `${baseUrl}${data.image.src}` ?? 'undefined',
-    image_width: (data.image?.width ?? 'undefined') as string,
-    image_height: (data.image.height ?? 'undefined') as string,
-    excerpt: data.excerpt ?? 'undefined',
-    date: data.date,
+  const urlParams: UrlParams = { date: data.date ?? '', excerpt: data.excerpt ?? 'undefined' }
+
+  if (!data || !data.image) {
+    urlParams.image = baseUrl + '/manelet.png'
+    urlParams.image_width = '1000'
+    urlParams.image_height = '1500'
+  } else {
+    urlParams.image = baseUrl + '/' + data.image.src
+    urlParams.image_width = data.image.width.toString()
+    urlParams.image_height = data.image.height.toString()
   }
-  return ogBaseUrl + data.title + '?' + new URLSearchParams(urlData)
+
+  return ogBaseUrl + data.title + '?' + new URLSearchParams(urlParams as Record<string, any>)
 }
 
 const ArticlePage: FC<Article> = ({ mdx, data }) => {
