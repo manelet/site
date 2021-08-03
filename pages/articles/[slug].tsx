@@ -48,12 +48,13 @@ const ArticlePage: FC<Article> = ({ mdx, data }) => {
       <Head>
         <title>{data.title} - Manel Escuer</title>
         <meta name="description" content={data.excerpt} />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@manelescuer" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.excerpt} />
         <meta name="twitter:image" content={ogUrl} />
         <meta property="og:image" content={ogUrl} />
+        <meta property="og:type" content="website"></meta>
       </Head>
       <Block customCss={[contentLinks]}>
         <h1 tw="text-4xl text-center">{data.title}</h1>
