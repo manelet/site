@@ -1,5 +1,5 @@
+import 'isomorphic-fetch'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import got from 'got'
 import getConfig from 'next/config'
 
 const { serverRuntimeConfig } = getConfig()
@@ -11,30 +11,16 @@ export interface InstagramApiItem {
   id: string
 }
 
-interface InstagramApiResponse {
-  data: InstagramApiItem[]
-  pagination: {
-    cursors: {
-      before: string
-      after: string
-    }
-  }
-}
-
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   res.setHeader('Content-Type', 'application/json')
 
   try {
-    const {
-      body,
-    }: {
-      body: InstagramApiResponse
-    } = await got(
-      `https://graph.instagram.com/me/media?fields=permalink,thumbnail_url,media_url,caption&access_token=${serverRuntimeConfig.instagram.token}`,
-      { responseType: 'json' }
-    )
+    const url = `https://graph.instagram.com/me/media?fields=permalink,thumbnail_url,media_url,caption&access_token=${serverRuntimeConfig.instagram.token}`
+    const response = await fetch(url)
+    const { data } = await response.json()
+
     res.statusCode = 200
-    res.end(JSON.stringify(body.data.slice(0, 4)))
+    res.end(JSON.stringify(data.slice(0, 4)))
   } catch (error) {
     res.statusCode = 500
     res.end(JSON.stringify(error))
