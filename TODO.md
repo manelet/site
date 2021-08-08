@@ -1,5 +1,6 @@
 ### todo
 
+- favicon
 - fix instagram api cuina
 - fix contact prod
 - lighthouse optimizations
